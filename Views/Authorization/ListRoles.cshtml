@@ -1,0 +1,29 @@
+﻿@model List<ListRolesViewModel>
+<html lang="en">
+
+<body>
+
+    <div class="container">
+        <h2>List of all rows</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>RoleID</th>
+                    <th>Rolename</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ListRolesViewModel in Model)
+                {
+                    <tr>
+                        <td>@ListRolesViewModel.RoleID</td>
+                        <td>@ListRolesViewModel.RoleName</td>
+                    </tr>
+                 }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+

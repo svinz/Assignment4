@@ -1,0 +1,52 @@
+﻿@model List<ListUsersViewModel>
+@{
+    ViewBag.Title = "List users";
+}
+<html lang="en">
+
+<body>
+
+    <div class="container">
+        <p>
+            <a class="btn btn-primary" asp-controller="UserAccount" asp-action="Register">Create new user</a>
+        </p>
+        <h2>List of all users</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Delete User</th>
+                    <th>Edit User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    var mod = Model.OrderBy(x => x.Username);
+
+                    @foreach (var registerViewModel in mod)
+                    {
+                        <tr>
+                            <td>@registerViewModel.Username</td>
+                            <td>@registerViewModel.Firstname</td>
+                            <td>@registerViewModel.Lastname</td>
+                            <td>
+                                <form asp-controller="UserAccount" asp-action="RemoveUser" asp-route-id="@registerViewModel.UserID" method="post">
+                                    <input type="submit" value="Delete" class="btn btn-link"
+                                           onclick="return confirm('Are you sure you want to delete @registerViewModel.Username?')" />
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-controller="UserAccount" asp-action="Edit" asp-route-id="@registerViewModel.UserID" method="get">
+                                    <input type="submit" value="Edit" class="btn btn-link" />
+                                </form>
+                            </td>
+                        </tr>
+                    }}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
